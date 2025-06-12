@@ -302,6 +302,7 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = response.getWriter();
@@ -369,6 +370,7 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
 
@@ -412,6 +414,7 @@ public class EmployeeServlet extends HttpServlet {
     }
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter out = resp.getWriter();
@@ -492,6 +495,7 @@ public class EmployeeServlet extends HttpServlet {
     }
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter out = resp.getWriter();
@@ -545,6 +549,14 @@ public class EmployeeServlet extends HttpServlet {
                     "status", "error",
                     "message", "Internal server error"
             ));
-}
-}
+        }
+    }
+
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        resp.setStatus(HttpServletResponse.SC_OK);
+    }
 }
